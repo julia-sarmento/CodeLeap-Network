@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 export const Content = styled.div`
@@ -13,9 +13,9 @@ export const Content = styled.div`
   flex-direction: column;
 
   main {
-    flex: 1;
     background: var(--white);
     padding: 2rem 1.5rem;
+    height: 100%;
   }
 
   @media (min-width: 640px) {
@@ -84,4 +84,12 @@ export const Form = styled.form`
       filter: brightness(0.9);
     }
   }
+`;
+
+export const PostList = styled.section`
+  margin-top: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
 `;
