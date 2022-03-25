@@ -48,7 +48,7 @@ export default createGlobalStyle`
   }
 
   .react-modal-overlay {
-    background: 'rgba(9, 10, 12, 0.8)';
+    background: rgba(119, 119, 119, 0.8);
     position: fixed;
     top: 0;
     left: 0;
@@ -57,6 +57,11 @@ export default createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(3px);
+  }
+
+  .react-modal-content {
+    background: var(--white);
+    width: 100%;
+    max-width: 40rem;
   }
 `;

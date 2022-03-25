@@ -27,7 +27,7 @@ export function updatePost(post: Omit<Post, 'username' | 'created_datetime'>) {
   }
 }
 
-export function deletePost(post_id: string) {
+export function deletePost(post_id: number) {
   return {
     type: PostActionTypes.deletePosts,
     payload: {

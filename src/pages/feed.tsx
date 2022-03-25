@@ -1,13 +1,16 @@
-import { useCallback, useEffect } from "react";
+import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { createPost, loadPosts } from "../actions/posts";
-import { Post as PostTypes } from "../actions/posts.types";
-import { Button } from "../components/Button";
 
-import { Header } from "../components/Header";
 import { Post } from "../components/Post";
+import { Button } from "../components/Button";
+import { Header } from "../components/Header";
+
 import { State } from "../redux/rootReducer";
+import { Post as PostTypes } from "../actions/posts.types";
+import { createPost, loadPosts } from "../actions/posts";
+
 import { api } from "../service/api";
 
 import { Container, Content, Form, PostList } from "../styles/pages/Feed/styles";
@@ -30,29 +33,33 @@ export default function Feed() {
   }, [dispatch]);
 
   const handleAddPost = useCallback(async ({ content, title }: InputFormData) => {
-    const username = sessionStorage.getItem('@CodeLeap:username');
+    try {
+      const username = sessionStorage.getItem('@CodeLeap:username');
 
-    if (!username) alert('Você não esta logado!');
+      if (!username) {
+        toast.error('You must be logged in to create a post.');
+        return;
+      }
 
-    const data = {
-      username,
-      content,
-      title,
+      const data = {
+        username,
+        content,
+        title,
+      }
+
+      const response = await api.post('/', data);
+
+      dispatch(createPost(response.data));
+    } catch {
+      toast.error('Internal Error. Try again later.');
     }
-
-    const response = await api.post('/', data);
-
-    dispatch(createPost(response.data));
-
     reset();
   }, [dispatch, reset]);
 
   return (
     <Container>
       <Content>
-        <Header>
-          CodeLeap Network
-        </Header>
+        <Header />
         <main>
           <Form onSubmit={handleSubmit(handleAddPost)}>
             <h2>What&apos;s on your mind?</h2>

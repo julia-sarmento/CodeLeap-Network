@@ -1,5 +1,6 @@
 import produce from 'immer';
 import { Reducer } from 'redux';
+
 import { PostActionTypes, PostState } from '../../actions/posts.types';
 
 const INITAL_STATE: PostState = {
