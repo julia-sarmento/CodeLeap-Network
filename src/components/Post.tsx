@@ -1,23 +1,33 @@
+import { useMemo } from "react";
+import { formatDistanceToNow } from 'date-fns';
+
 import { Header } from "./Header";
+
+import { Post } from "../actions/posts.types";
 
 import { Container, Info } from "../styles/components/Post/styles";
 
-export function Post() {
+type PostProps = {
+  post: Post;
+  isOwner: boolean;
+}
+
+export function Post({ post, isOwner }: PostProps) {
+  const timeDistanceToNow = useMemo(() => {
+    return formatDistanceToNow(new Date(post.created_datetime), { addSuffix: true })
+  }, [post]);
+
   return (
     <Container>
-      <Header hasOptions>
-        My First Post at CodeLeap Network!
+      <Header hasOptions={isOwner}>
+        {post.title}
       </Header>
       <section>
         <Info>
-          <strong>@Victor</strong>
-          <span>25 minutes ago</span>
+          <strong>@{post.username}</strong>
+          <span>{timeDistanceToNow}</span>
         </Info>
-        <p>
-          Curabitur suscipit suscipit tellus. Phasellus consectetuer vestibulum elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas egestas arcu quis ligula mattis placerat. Duis vel nibh at velit scelerisque suscipit.
-
-          Duis lobortis massa imperdiet quam. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Fusce a quam. Nullam vel sem. Nullam cursus lacinia erat.
-        </p>
+        <p>{post.content}</p>
       </section>
     </Container>
   )

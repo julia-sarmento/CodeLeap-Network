@@ -67,23 +67,6 @@ export const Form = styled.form`
       }
     }
   }
-
-  button {
-    margin-top: 1.25rem;
-    width: fit-content;
-    align-self: end;
-    padding: 0.5rem 2rem;
-    background: var(--black);
-    color: var(--white);
-    font-weight: 700;
-    border: none;
-
-    transition: filter 0.2s;
-
-    :hover {
-      filter: brightness(0.9);
-    }
-  }
 `;
 
 export const PostList = styled.section`

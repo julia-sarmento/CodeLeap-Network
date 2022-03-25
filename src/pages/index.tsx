@@ -1,17 +1,37 @@
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+
+import { Button } from "../components/Button";
+
 import { Container, Form } from "../styles/pages/Home/styles";
 
+type InputFormData = {
+  username: string;
+}
+
 export default function Home() {
+  const router = useRouter();
+  const { register, handleSubmit, watch } = useForm<InputFormData>();
+
+  const { username } = watch();
+
+  function handleSignIn({ username }: InputFormData) {
+    sessionStorage.setItem('@CodeLeap:username', username);
+
+    router.push('/feed');
+  }
+
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSubmit(handleSignIn)}>
         <h1>Welcome to CodeLeap network!</h1>
 
         <label>
           Please enter your username
-          <input type="text" placeholder="John doe" />
+          <input type="text" placeholder="John doe" {...register('username')} />
         </label>
 
-        <button type="submit">ENTER</button>
+        <Button type="submit" disabled={!(!!username)}>ENTER</Button>
       </Form>
     </Container>
   )
