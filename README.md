@@ -1,34 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+  CodeLeap Network
+</h1>
 
-## Getting Started
+<p align="center">
+  <img alt="CodeLeap Network" src=".github/codeleap_home.png" width="100%">
+</p>
 
-First, run the development server:
+<p align="center">
+  <a href="https://code-leap-network.vercel.app/">Acessar site</a>
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
+## Sobre o Projeto
+
+Aplicação feita em ReactJS + Next de CRUD de postagens consumindo API da CodeLeap.
+
+Feito para teste tecnico de vaga ReactJS Developer Junior.
+
+## Funcionalidades
+
+- [x] Layout responsivo.
+
+- [x] Login armazenando usuário no Session Storage.
+
+- [x] Listagem, criação, edição e remoção de post.
+
+## Possiveis próximas features
+
+- [ ] Paginação de posts.
+
+- [ ] Rotas privadas para usuários logados.
+
+- [ ] Filtro por usuário.
+
+- [ ] Logout do usuário.
+
+## Feito com:
+- [ReactJS](https://github.com/facebook/react) - Biblioteca Javascript para construção de interfaces.
+- [Next.js](https://github.com/vercel/next.js) - Framework React JS.
+- [Styled Components](https://styled-components.com/) - Biblioteca de estilização.
+- [Typescript](https://github.com/microsoft/TypeScript) - Supertset para Javascript.
+- [React-modal](https://github.com/reactjs/react-modal) - Biblioteca para construção de modal.
+- [Redux](https://redux.js.org/) - Biblioteca de gerenciamento de estado.
+
+## Como executar
+
+```
+$ git clone https://github.com/Garcez17/CodeLeap-Network
+$ cd CodeLeap-Network
+$ yarn
+$ yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Licença
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://github.com/Garcez17/CodeLeap-Network/blob/main/LICENSE) para mais detalhes.
