@@ -14,6 +14,7 @@ import { createPost, loadPosts } from "../actions/posts";
 import { api } from "../service/api";
 
 import { Container, Content, Form, PostList } from "../styles/pages/Feed/styles";
+import Head from "next/head";
 
 type InputFormData = {
   title: string;
@@ -57,38 +58,43 @@ export default function Feed() {
   }, [dispatch, reset]);
 
   return (
-    <Container>
-      <Content>
-        <Header />
-        <main>
-          <Form onSubmit={handleSubmit(handleAddPost)}>
-            <h2>What&apos;s on your mind?</h2>
+    <>
+      <Head>
+        <title>Feed | CodeLeap Network</title>
+      </Head>
+      <Container>
+        <Content>
+          <Header />
+          <main>
+            <Form onSubmit={handleSubmit(handleAddPost)}>
+              <h2>What&apos;s on your mind?</h2>
 
-            <label>
-              Title
-              <input type="text" placeholder="Hello World" {...register('title')} />
-            </label>
+              <label>
+                Title
+                <input type="text" placeholder="Hello World" {...register('title')} />
+              </label>
 
-            <label>
-              Content
-              <textarea placeholder="Content here" {...register('content')} />
-            </label>
+              <label>
+                Content
+                <textarea placeholder="Content here" {...register('content')} />
+              </label>
 
-            <Button
-              type="submit"
-              disabled={!(title && content)}
-            >
-              CREATE
-            </Button>
-          </Form>
+              <Button
+                type="submit"
+                disabled={!(title && content)}
+              >
+                CREATE
+              </Button>
+            </Form>
 
-          <PostList>
-            {posts.map(post =>
-              <Post key={post.id} post={post} isOwner={sessionStorage.getItem('@CodeLeap:username') === post.username} />
-            )}
-          </PostList>
-        </main>
-      </Content>
-    </Container>
+            <PostList>
+              {posts.map(post =>
+                <Post key={post.id} post={post} isOwner={sessionStorage.getItem('@CodeLeap:username') === post.username} />
+              )}
+            </PostList>
+          </main>
+        </Content>
+      </Container>
+    </>
   )
 }

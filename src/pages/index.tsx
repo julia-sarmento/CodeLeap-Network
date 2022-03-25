@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
@@ -22,17 +23,22 @@ export default function Home() {
   }
 
   return (
-    <Container>
-      <Form onSubmit={handleSubmit(handleSignIn)}>
-        <h1>Welcome to CodeLeap network!</h1>
+    <>
+      <Head>
+        <title>Sign Up | CodeLeap Network</title>
+      </Head>
+      <Container>
+        <Form onSubmit={handleSubmit(handleSignIn)}>
+          <h1>Welcome to CodeLeap network!</h1>
 
-        <label>
-          Please enter your username
-          <input type="text" placeholder="John doe" {...register('username')} />
-        </label>
+          <label>
+            Please enter your username
+            <input type="text" placeholder="John doe" {...register('username')} />
+          </label>
 
-        <Button type="submit" disabled={!(!!username)}>ENTER</Button>
-      </Form>
-    </Container>
+          <Button type="submit" disabled={!(!!username)}>ENTER</Button>
+        </Form>
+      </Container>
+    </>
   )
 }
