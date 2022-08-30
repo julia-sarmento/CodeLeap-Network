@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { RiThumbUpFill, RiThumbUpLine } from 'react-icons/ri';
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
 
 import { DeletePostModal } from './DeletePostModal';
