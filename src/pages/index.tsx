@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "../components/Button";
@@ -12,6 +13,13 @@ type InputFormData = {
 
 export default function Home() {
   const router = useRouter();
+
+  useEffect(() => {
+    const username = sessionStorage.getItem('@CodeLeap:username');
+  
+    if (username) router.push('/feed');
+  }, []);
+
   const { register, handleSubmit, watch } = useForm<InputFormData>();
 
   const { username } = watch();

@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Post } from "../components/Post";
@@ -15,6 +15,8 @@ import { api } from "../service/api";
 
 import { Container, Content, Form, PostList } from "../styles/pages/Feed/styles";
 import Head from "next/head";
+import { Pagination } from "../components/Pagination";
+import { useRouter } from "next/router";
 
 type InputFormData = {
   title: string;
@@ -22,16 +24,31 @@ type InputFormData = {
 }
 
 export default function Feed() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const username = sessionStorage.getItem('@CodeLeap:username');
+  
+    if (!username) router.push('/');
+  }, []);
+  
+  const [page, setPage] = useState(0);
+  const [totalResults, setTotalResults] = useState(0);
+  
   const dispatch = useDispatch();
+
   const posts = useSelector<State, PostTypes[]>(({ posts }) => posts.posts);
   const { register, handleSubmit, watch, reset } = useForm<InputFormData>();
 
   const { title, content } = watch();
 
   useEffect(() => {
-    api.get('/')
-      .then(res => dispatch(loadPosts(res.data.results)));
-  }, [dispatch]);
+    api.get(`/?offset=${10 * page}`)
+      .then(res => {
+        dispatch(loadPosts(res.data.results));
+        setTotalResults(res.data.count);
+      });
+  }, [dispatch, page]);
 
   const handleAddPost = useCallback(async ({ content, title }: InputFormData) => {
     try {
@@ -92,6 +109,13 @@ export default function Feed() {
                 <Post key={post.id} post={post} isOwner={sessionStorage.getItem('@CodeLeap:username') === post.username} />
               )}
             </PostList>
+            {posts.length > 0 && (
+              <Pagination
+                onPageChange={setPage}
+                currentPage={page + 1}
+                totalCountOfRegisters={totalResults}
+              />
+            )}
           </main>
         </Content>
       </Container>

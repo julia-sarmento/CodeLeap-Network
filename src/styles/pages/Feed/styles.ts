@@ -16,6 +16,9 @@ export const Content = styled.div`
     background: var(--white);
     padding: 2rem 1.5rem;
     height: 100%;
+
+    display: flex;
+    flex-direction: column;
   }
 
   @media (min-width: 640px) {

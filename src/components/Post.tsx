@@ -1,11 +1,11 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { formatDistanceToNow } from 'date-fns';
 
 import { PostHeader } from "./PostHeader";
 
 import { Post } from "../actions/posts.types";
 
-import { Container, Info } from "../styles/components/Post/styles";
+import { Container, Section, Info, Content } from "../styles/components/Post/styles";
 
 type PostProps = {
   post: Post;
@@ -22,13 +22,15 @@ export function Post({ post, isOwner }: PostProps) {
       <PostHeader hasOptions={isOwner} post={post}>
         {post.title}
       </PostHeader>
-      <section>
+      <Section>
         <Info>
           <strong>@{post.username}</strong>
           <span>{timeDistanceToNow}</span>
         </Info>
-        <p>{post.content}</p>
-      </section>
+        <Content>
+          <p>{post.content}</p>
+        </Content>
+      </Section>
     </Container>
   )
 }

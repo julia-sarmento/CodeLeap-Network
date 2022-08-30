@@ -13,25 +13,20 @@ export const Container = styled.div`
     font-size: 1.375rem;
   }
 
-  > div {
-    display: flex;
-    gap: 1rem;
+  button {
+    background: transparent;
+    border: 0;
 
-    button {
-      border: 0;
-      background: transparent;
+    svg {
+      color: var(--white);
+      width: 1.5rem;
+      height: 1.5rem;
+    }
 
-      svg {
-        color: var(--white);
-        width: 1.5rem;
-        height: 1.5rem;
-      }
+    transition: filter 0.2;
 
-      transition: filter 0.2s;
-
-      :hover {
-        filter: brightness(0.5);
-      }
+    :hover {
+      filter: brightness(0.8);
     }
   }
 `;

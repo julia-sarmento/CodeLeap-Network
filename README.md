@@ -14,7 +14,7 @@
 
 Aplicação feita em ReactJS + Next de CRUD de postagens consumindo API da CodeLeap.
 
-Feito para teste tecnico de vaga ReactJS Developer Junior.
+Feito para teste tecnico de vaga Junior Frontend Engineer - CodeCamp program.
 
 ## Funcionalidades
 
@@ -26,13 +26,11 @@ Feito para teste tecnico de vaga ReactJS Developer Junior.
 
 ## Possiveis próximas features
 
-- [ ] Paginação de posts.
+- [x] Paginação de posts.
 
-- [ ] Rotas privadas para usuários logados.
+- [x] Rotas privadas para usuários logados.
 
-- [ ] Filtro por usuário.
-
-- [ ] Logout do usuário.
+- [x] Logout do usuário.
 
 ## Feito com:
 - [ReactJS](https://github.com/facebook/react) - Biblioteca Javascript para construção de interfaces.
