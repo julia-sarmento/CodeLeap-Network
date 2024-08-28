@@ -33,11 +33,11 @@ A aplicação oferece as seguintes funcionalidades, que foram abrangidas nos tes
   - **Interação do Usuário:** Fluxos de login, criação, edição, e exclusão de posts.
   - **Experiência de Usuário:** Testes de responsividade e usabilidade em diferentes tamanhos de tela e dispositivos.
   - **Validação Visual:** Verificação de estilos e layout, assegurando que a aplicação se mantenha consistente visualmente.
+     
+  Aqui, você pode acessar a <a href="https://docs.google.com/spreadsheets/d/1Uy6n8CiOt7i4ZLYKFJP-beTAOmSUSwGJ/edit?usp=drive_link&ouid=118409630159728016878&rtpof=true&sd=true"> planilha com os casos de testes </a> , as <a href="https://drive.google.com/drive/folders/1dUiGUN1797EG9DMgy-QW3FRGK033-2qW"> evidências </a> e o <a href="https://drive.google.com/file/d/15J7xs28J5BLjC3xS9TkVooXHB6JpfFNw/view?usp=drive_link"> relatório de testes </a>   gerado diretamente pelo Postman.
+
 
 ## Possíveis Próximas Features
 
-Durante os testes, foram identificadas áreas para melhorias futuras, que incluem:
-
 - **Paginação de Posts:** Implementação de paginação para melhorar a navegação e o desempenho ao listar grande quantidade de posts.
 - **Rotas Privadas:** Introdução de rotas privadas para restringir o acesso a determinadas páginas aos usuários logados.
-- **Logout:** Adição de uma funcionalidade de logout para permitir que os usuários encerrem suas sessões de forma segura.
