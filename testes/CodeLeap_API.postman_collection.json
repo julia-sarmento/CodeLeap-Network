@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "5019f525-9130-4e91-a441-7b5fd4bb6a5f",
+		"name": "CodeLeap_API",
+		"description": "A simple API testing focused on the basic methods POST, GET, PACTH and DELETE.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14621334"
+	},
+	"item": [
+		{
+			"name": "POST method",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"All fields are required\", function () {\r",
+							"  const jsonData = pm.response.json();\r",
+							"  if (!jsonData.username) {\r",
+							"    pm.expect.fail(\"Username is required\");\r",
+							"  }\r",
+							"  if (!jsonData.title) {\r",
+							"    pm.expect.fail(\"Title is required\");\r",
+							"  }\r",
+							"  if (!jsonData.content) {\r",
+							"    pm.expect.fail(\"Content is required\");\r",
+							"  }\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Post criado com sucesso\", function () {\r",
+							"      pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"John Doe\",\r\n    \"title\": \"\",\r\n    \"content\": \"Testing 123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}",
+					"host": [
+						"{{baseURL}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Kevin Doe",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Kevin Doe\",\r\n    \"title\": \"Hello World\",\r\n    \"content\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}",
+							"host": [
+								"{{baseUrl}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "GET Method",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content type is json\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has all expected fields\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    jsonData.results.forEach(function(item) {\r",
+							"        pm.expect(item).to.have.property('id');\r",
+							"        pm.expect(item).to.have.property('username');\r",
+							"        pm.expect(item).to.have.property('created_datetime');\r",
+							"        pm.expect(item).to.have.property('title');\r",
+							"        pm.expect(item).to.have.property('content');\r",
+							"        pm.expect(item).to.have.property('author_ip');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has correct data types\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    jsonData.results.forEach(function(item) {\r",
+							"        pm.expect(typeof item.id).to.eql('number');\r",
+							"        pm.expect(typeof item.username).to.eql('string');\r",
+							"        pm.expect(new Date(item.created_datetime).toString()).to.not.eql('Invalid Date');\r",
+							"        pm.expect(typeof item.title).to.eql('string');\r",
+							"        pm.expect(typeof item.content).to.eql('string');\r",
+							"        pm.expect(typeof item.author_ip).to.eql('string');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH Method",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Teste 2: Verificar se os campos \"title\" ou \"content\" foram atualizados\r",
+							"pm.test(\"Fields 'title' and 'content' are updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.title).to.eql('Olá Mundo'); // substitua 'new_title' pelo valor que você enviou na solicitação PATCH\r",
+							"    pm.expect(jsonData.content).to.eql(''); // substitua 'new_content' pelo valor que você enviou na solicitação PATCH\r",
+							"});\r",
+							"\r",
+							"// Teste 3: Verificar se os campos \"title\" ou \"content\" não receberam valores vazios\r",
+							"pm.test(\"Fields 'title' or 'content' are not empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.title).to.not.be.empty; \r",
+							"    pm.expect(jsonData.content).to.not.be.empty; \r",
+							"});\r",
+							"\r",
+							"// Teste 4: Verificar se os campos \"id\", \"username\", \"created_datetime\" e \"author_ip\" não foram alterados\r",
+							"pm.test(\"Fields 'id', 'username', 'created_datetime' and 'author_ip' are not updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(69127); // substitua 'old_id' pelo valor original antes da solicitação PATCH\r",
+							"    pm.expect(jsonData.username).to.eql('Kevin Doe'); // substitua 'old_username' pelo valor original antes da solicitação PATCH\r",
+							"    pm.expect(jsonData.created_datetime).to.eql('2024-05-07T18:19:35.705557Z'); // substitua 'old_created_datetime' pelo valor original antes da solicitação PATCH\r",
+							"    pm.expect(jsonData.author_ip).to.eql('177.170.182.26'); // substitua 'old_author_ip' pelo valor original antes da solicitação PATCH\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Kevin Doe\", \r\n    \"title\": \"Olá Mundo\",\r\n    \"content\": \"Testando 321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/:{{id}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						":{{id}}",
+						""
+					],
+					"variable": [
+						{
+							"key": "{{id}}",
+							"value": "69127"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Kevin Doe",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Hello World\",\r\n    \"content\": \"Testing 321\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/:{{id}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								":{{id}}",
+								""
+							],
+							"variable": [
+								{
+									"key": "{{id}}",
+									"value": "69127"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "PATCH - Content or Title should not be empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Teste 2: Verificar se os campos \"title\" ou \"content\" foram atualizados\r",
+							"pm.test(\"Fields 'title' and 'content' are updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.title).to.eql('Hello World'); // substitua 'new_title' pelo valor que você enviou na solicitação PATCH\r",
+							"    pm.expect(jsonData.content).to.eql(''); // substitua 'new_content' pelo valor que você enviou na solicitação PATCH\r",
+							"});\r",
+							"\r",
+							"// Teste 3: Verificar se os campos \"title\" ou \"content\" não receberam valores vazios\r",
+							"pm.test(\"Fields 'title' or 'content' are not empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.title).to.not.be.empty; \r",
+							"    pm.expect(jsonData.content).to.not.be.empty; \r",
+							"});\r",
+							"\r",
+							"// Teste 4: Verificar se os campos \"id\", \"username\", \"created_datetime\" e \"author_ip\" não foram alterados\r",
+							"pm.test(\"Fields 'id', 'username', 'created_datetime' and 'author_ip' are not updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(69127); // substitua 'old_id' pelo valor original antes da solicitação PATCH\r",
+							"    pm.expect(jsonData.username).to.eql('Kevin Doe'); // substitua 'old_username' pelo valor original antes da solicitação PATCH\r",
+							"    pm.expect(jsonData.created_datetime).to.eql('2024-05-07T18:19:35.705557Z'); // substitua 'old_created_datetime' pelo valor original antes da solicitação PATCH\r",
+							"    pm.expect(jsonData.author_ip).to.eql('177.170.182.26'); // substitua 'old_author_ip' pelo valor original antes da solicitação PATCH\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Hello World\",\r\n    \"content\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/:{{id}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						":{{id}}",
+						""
+					],
+					"variable": [
+						{
+							"key": "{{id}}",
+							"value": "69127"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE method",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Post has been deleted successfully\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}:{{id}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "{{id}}",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "DELETE method",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/:{{id}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								":{{id}}",
+								""
+							],
+							"variable": [
+								{
+									"key": "{{id}}",
+									"value": "69127"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "https://dev.codeleap.co.uk/careers/",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": "69127",
+			"type": "string"
+		}
+	]
+}
